@@ -13,7 +13,7 @@ With a given VCF, this script calls Plink 1.9 beta to perform linkage pruning (w
 
 This can be run on either a compressed or uncompressed VCF, and is intended to be executed with an sbatch script and an HPC.
 
-USAGE: bash admixture_k1_through_k15.bash -v <input_vcf_file> -p <plink_output_file_prefix> -s <sample_names_output_file_prefix> -a <admixture_output_file_prefix>
+USAGE: bash admixture_k1_through_k15.bash -v <input_vcf_file> -o <output_file_prefix> -s <sample_names_output_file_prefix>
 
 #parse_CVs.bash
 
