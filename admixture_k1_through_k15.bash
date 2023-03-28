@@ -7,27 +7,25 @@
 #     USAGE:
 # [-------------]
 
-# bash admixture_k1_through_k15.bash -v <input_vcf_file> -p <plink_output_file_prefix> -s <sample_names_output_file_prefix> -a <admixture_output_file_prefix>
+# bash admixture_k1_through_k15.bash -v <input_vcf_file> -o <output_file_prefix> -s <sample_names_output_file_prefix> 
 
 # ------------
 # Arguments
 # ------------
 
-while getopts ":v:p:s:a:" opt; do
+while getopts ":v:o:s:" opt; do
   case ${opt} in
 
 # Input VCF file
     v ) input_vcf_file="$OPTARG"
       ;;
-# Plink output file prefix                                                                
-    p ) plink_output_prefix="$OPTARG"                                                
+# Output file prefix                                                                
+    o ) output_prefix="$OPTARG"                                                
       ;; 
 # Sample name output file prefix                                                     
     s ) sample_names_prefix="$OPTARG"                                                
       ;; 
-# Admixture output file prefix
-    a ) admixture_output_prefix="$OPTARG"
-      ;;
+
     \? ) echo "Invalid option: -$OPTARG" 1>&2
       ;;
     : ) echo "Option -$OPTARG requires an argument." 1>&2
@@ -74,7 +72,7 @@ echo "[ ***Removed chromosome names*** ]"
 
 # Filter and remove all loci where >99.9% genotypes are missing
 
-plink --bfile for_admixture_prunned --geno 0.999 --make-bed --out ${plink_output_prefix}
+plink --bfile for_admixture_prunned --geno 0.999 --make-bed --out ${output_prefix}
 
 echo "[ ***Removed all loci where >99.9% genotypes are missing*** ]"
 
@@ -87,7 +85,7 @@ rm sites_to_be_prunned*
 # Collect sample names for plotting
 # -----------------------------------
 
-cut -f 1 ${plink_output_prefix}.nosex > ${sample_names_prefix}.txt
+cut -f 1 ${output_prefix}.nosex > ${sample_names_prefix}.txt
 
 echo "[ ***Sample names collected*** ]"
 
@@ -101,7 +99,7 @@ echo "[ ***Begin Admixture analysis*** ]"
 
 for i in {1..15}
 do
-admixture --cv ${plink_output_prefix}.bed $i > ${admixture_output_prefix}_${i}.out
+admixture --cv ${output_prefix}.bed $i > ${output_prefix}_${i}.out
 done
 
 echo "[ ***All ancestry coefficients finished!*** ]"
