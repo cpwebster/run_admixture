@@ -76,7 +76,7 @@ plink --bfile for_admixture_prunned --geno 0.999 --make-bed --out ${output_prefi
 
 echo "[ ***Removed all loci where >99.9% genotypes are missing*** ]"
 
-# Remove unneeded files
+# Remove unneeded files, keep environment clean
 
 rm for_admixture_prunned*
 rm sites_to_be_prunned*
