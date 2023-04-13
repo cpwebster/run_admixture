@@ -46,11 +46,21 @@ module load admixture/1.3.0
 
 # Identify linkage sites to be pruned (keeping indels)
 
-plink --vcf ${input_vcf_file} --allow-extra-chr 0 --double-id --threads 8 --indep-pairwise 50 10 0.1 --out sites_to_be_prunned
+plink --vcf ${input_vcf_file} \
+--allow-extra-chr 0 \
+--double-id \
+--threads 8 \
+--indep-pairwise 50 10 0.1 \
+--out sites_to_be_prunned
 
 # Generate Admixture input files with pruned linkage data
 
-plink --vcf ${input_vcf_file} --extract sites_to_be_prunned.prune.in --make-bed --out for_admixture_prunned --allow-extra-chr --double-id
+plink --vcf ${input_vcf_file} \
+--extract sites_to_be_prunned.prune.in \
+--make-bed \
+--out for_admixture_prunned \
+--allow-extra-chr \
+--double-id
 
 echo "[ ***Linkage prunning conducted*** ]"
 
@@ -72,7 +82,10 @@ echo "[ ***Removed chromosome names*** ]"
 
 # Filter and remove all loci where >99.9% genotypes are missing
 
-plink --bfile for_admixture_prunned --geno 0.999 --make-bed --out ${output_prefix}
+plink --bfile for_admixture_prunned \
+--geno 0.999 \
+--make-bed \
+--out ${output_prefix}
 
 echo "[ ***Removed all loci where >99.9% genotypes are missing*** ]"
 
