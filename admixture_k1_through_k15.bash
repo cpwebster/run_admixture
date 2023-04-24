@@ -62,7 +62,7 @@ plink --vcf ${input_vcf_file} \
 --allow-extra-chr \
 --double-id
 
-echo "[ ***Linkage prunning conducted*** ]"
+echo "[ *** Linkage prunning conducted *** ]"
 
 # -------------------------
 # Remove chromosome names
@@ -74,7 +74,7 @@ echo "[ ***Linkage prunning conducted*** ]"
 awk '{$1="0";print $0}' for_admixture_prunned.bim > for_admixture_prunned.bim.tmp
 mv for_admixture_prunned.bim.tmp for_admixture_prunned.bim
 
-echo "[ ***Removed chromosome names*** ]"
+echo "[ *** Removed chromosome names *** ]"
 
 # --------------------------
 # Remove missing genotypes
@@ -87,7 +87,7 @@ plink --bfile for_admixture_prunned \
 --make-bed \
 --out ${output_prefix}
 
-echo "[ ***Removed all loci where >99.9% genotypes are missing*** ]"
+echo "[ *** Removed all loci where >99.9% genotypes are missing *** ]"
 
 # Remove unneeded files, keep environment clean
 
@@ -100,13 +100,13 @@ rm sites_to_be_prunned*
 
 cut -f 1 ${output_prefix}.nosex > ${sample_names_prefix}.txt
 
-echo "[ ***Sample names collected*** ]"
+echo "[ *** Sample names collected *** ]"
 
 # ---------------------------
 # Admixture analysis K=1-15
 # ---------------------------
 
-echo "[ ***Begin Admixture analysis*** ]"
+echo "[ *** Begin Admixture analysis *** ]"
 
 # For loop to conduct admixture analysis with ancestry coefficients of 1-15
 
@@ -115,6 +115,6 @@ do
 admixture --cv ${output_prefix}.bed $i > ${output_prefix}_${i}.out
 done
 
-echo "[ ***All ancestry coefficients finished!*** ]"
+echo "[ *** All ancestry coefficients finished! *** ]"
 
 
