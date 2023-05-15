@@ -36,7 +36,7 @@ done
 touch ${output_file}.txt
 
 # Create a header for output file
-echo -e 'CV\tK' > ${output_file_name}.txt
+echo -e 'K\tCV' > ${output_file_name}.txt
 
 # For loop to run through every admixture output file (.out)
 for f in *.out
