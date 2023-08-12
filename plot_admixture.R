@@ -1,5 +1,4 @@
 library(tidyverse)
-library(RColorBrewer)
 library(ggthemes)
 
 
@@ -19,10 +18,10 @@ colnames(tbl) <- c('1', '2', '3', '4', '5')
 # tab-delimited text file with sample names in column 1, no header
 pop.data <- read.table("<your_file_with_sample_names_here.txt>", sep = "\t", header = FALSE)
 
-# add names to Q file 
+# create a names column
 names <- rep(pop.data$V1)
 
-# convert to data frame, set row names (samples)
+# convert to data frame, add row names (samples)
 tbl_1 <- data.frame(names, tbl, row.names = 1)
 
 
@@ -58,7 +57,7 @@ plot_data %>%
                              "darkorange1", "royalblue1",
                              "seagreen3")) +
   geom_col() +
-  theme_hc() +
+  theme_minimal() +
   ggtitle("Admixture K=5") + 
   theme(plot.title = element_text(hjust = 0.5)) + xlab("") + 
   ylab("Ancestry") +
